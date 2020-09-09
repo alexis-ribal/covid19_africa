@@ -7,10 +7,6 @@
 * [About this repository](#about-the-project)
   * [Built With](#built-with)
 * [Getting Started](#getting-started)
-  * [Prerequisites](#prerequisites)
-  * [Installation](#installation)
-* [Usage](#usage)
-* [Roadmap](#roadmap)
 * [Contributing](#contributing)
 * [License](#license)
 * [Contact](#contact)
@@ -35,7 +31,7 @@ You will need Stata 14.1 or higher in order to reproduce these charts.
 <!-- GETTING STARTED -->
 ## Getting Started
 
-Make sure you install the [World Bank Open Data API] (https://blogs.worldbank.org/opendata/accessing-world-bank-open-data-stata). 
+Make sure you install the [World Bank Open Data API](https://blogs.worldbank.org/opendata/accessing-world-bank-open-data-stata). 
 ```sh
 install wbopendata
 ```
