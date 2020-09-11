@@ -1,37 +1,63 @@
-# Visualizations of reported cases of COVID-19 in sub-Saharan Africa
+# Visualizing the number of reported cases of COVID-19 in sub-Saharan African
 
 
 <!-- TABLE OF CONTENTS -->
 ## Table of Contents
 
 * [About this repository](#about-the-project)
-  * [Built With](#built-with)
+* [Charts](#charts)
 * [Getting Started](#getting-started)
-* [Contributing](#contributing)
 * [License](#license)
 * [Contact](#contact)
-* [Acknowledgements](#acknowledgements)
+* [Contributing](#contributing)
 
 
 
 <!-- ABOUT THE PROJECT -->
 ## About this repository
 
-Countries in the sub-Saharan African region (SSA) recorded their first cases and deaths from COVID-19 weeks later than Asia, North America and Europe. For example, South Africa, the first country in SSA to report over 100 cases on March 18, did so one month after Italy and two weeks later than the United States.
+As part of the [Economics for Transformation](https://www.econfortransformation.org/) network, me and my team have been creating different ways to visualize the evolution of the COVID-19 pandemic during 2020 in Sub-Saharan Africa, while monitoring the situation in many of the region's countries.
 
-However, the trajectory of confirmed infections is following a similar path to other regions, crossing 10,000 confirmed cases just 25 days after it crossed 1,000. And only 50 days after the first case was reported. By comparison, it took more than 50 days for Western Europe, North America, South Asia and Southeast Asia to reach this point.  Latin America has been the only region that reached this point faster than in SSA.
+We try to update the charts on a daily basis taking the numbers from the [COVID-19 Data Repository by the Center for Systems Science and Engineering (CSSE) at Johns Hopkins University](https://github.com/CSSEGISandData/COVID-19) that feeds the [dashboard](https://gisanddata.maps.arcgis.com/apps/opsdashboard/index.html#/bda7594740fd40299423467b48e9ecf6) that has been widely cited and used by multiple institutions and researchers.
 
-This repository contains the code used to create visualizations to show the evolution of the pandemic in the region.
+While Sub-Saharan African region (SSA) started to record their first cases and deaths from COVID-19 weeks later than Asia, North America and Europe and testing and reporting has not been as consistent as in other parts of the world, it is important to observe any alarming signals from the data. For example, South Africa, the first country in SSA to report over 100 cases on March 18, did so one month after Italy and two weeks later than the United States and now is between the 10 countries with the highest number of reported cases.
+
+In this repository we facilitate the code used to create the charts that are posted in the [blog post](https://www.econfortransformation.org/reported-cases/) in the [Economics for Transformation](https://www.econfortransformation.org/) site.  We encourage the public to share these charts and for those who are int
+
+This repository contains the code used to create visualizations to show the evolution of the pandemic in the region.  More analysis can be found in the [blog post](https://www.econfortransformation.org/reported-cases/).
 
 
-### Built With
-You will need Stata 14.1 or higher in order to reproduce these charts.
+### Charts
+
+![Cumulative cases by region](/charts/regions_cumu.png)
+![Cumulative cases per million people by region](/charts/regions_pc_cumu.png)
+![Reported cases by country](/charts/confirmed_bar.png)
+![Cumulative reported cases by country](/charts/countries_cumu_allssa.png)
+![Daily reported cases in SSA and South Africa](/charts/new_daily_cases.png)
 
 
 <!-- GETTING STARTED -->
 ## Getting Started
 
-Make sure you install the [World Bank Open Data API](https://blogs.worldbank.org/opendata/accessing-world-bank-open-data-stata). 
+To reproduce these charts you need at least Stata 13 or a more recent version.  All these charts were created using Stata 15.
+
+In Stata you will need to install the following packages:
+
+* The [World Bank Open Data API](https://blogs.worldbank.org/opendata/accessing-world-bank-open-data-stata). 
 ```sh
 install wbopendata
 ```
+
+## License
+
+The image and the code can be used under the [CC-BY](https://creativecommons.org/licenses/by/4.0/) license which requires attribution to the author.
+
+
+## Contact
+
+If you have any question about this repository or the charts displayed here, please contact ariveraballester@worldbank.org
+
+
+## Contribuiting
+
+If you would like to contribute by creating other striking visualizations or suggest changes to these, please contact ariveraballester@worldbank.org
