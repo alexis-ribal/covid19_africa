@@ -26,6 +26,8 @@ In this repository we facilitate the code used to create the charts that are pos
 
 This repository contains the code used to create visualizations to show the evolution of the pandemic in the region.  More analysis can be found in the [blog post](https://www.econfortransformation.org/reported-cases/).
 
+The code to create the chart can be found [here](https://github.com/alexis-ribal/covid19_africa/blob/master/scripts/covid19_africa.do) and the high-resolution charts can be found [here](https://github.com/alexis-ribal/covid19_africa/tree/master/charts).
+
 
 ### Charts
 
