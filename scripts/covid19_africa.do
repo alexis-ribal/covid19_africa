@@ -30,10 +30,9 @@ Latest update: Sep 8, 2020
 		
 		Chart 1: Reported COVID-19 cases by region
 		Chart 2: Reported COVID-19 cases per million people by region
-		Chart 3: Cumulative reported cases map
-		Chart 4: Bar chart of COVID-19 cases by country
-		Chart 5: Reported cases line chart by country
-		Chart 6: Chart showing daily COVID-19 cases in South Africa and the rest of Africa
+		Chart 3: Bar chart of COVID-19 cases by country
+		Chart 4: Reported cases line chart by country
+		Chart 5: Chart showing daily COVID-19 cases in South Africa and the rest of Africa
 
 */
 
@@ -255,56 +254,11 @@ Latest update: Sep 8, 2020
 	graph export "$projectfolder/charts/regions_pc_cumu.png", replace	
 	
 		
-	
-/*====================================================================================
-              Chart 3: Cumulative reported cases map
-==================================================================================*/
-
-* cumulative reported cases africa map
-
-
-	use "$projectfolder/data/coronavirus_jhu_reported.dta", clear
-
-	sort iso3 date
-
-	gen latest = iso3 != iso3[_n+1]
-
-	keep if latest==1
-
-	merge 1:1 iso3 using "$projectfolder/data/world.dta"
-
-	drop _merge
-
-	keep if regionname=="Sub-Saharan Africa" | iso3 == "ESH" | iso3 == "MAR" | iso3 == "DZA" | iso3 == "LBY" | iso3 == "TUN" | iso3 == "EGY" | iso3 == "LSO" | iso3 == "MWI" | iso3 == "SSD" | iso3 == "STP" | iso3 == "DJI"
-
-	gen ln_cum_conf = asinh(confirmed)
-
-	gen africa_map = 1 if ln_cum_conf > 12.2 & ln_cum_conf !=.
-	replace africa_map = 2 if ln_cum_conf > 9.9 & ln_cum_conf <= 12.2
-	replace africa_map = 3 if ln_cum_conf > 7.6 & ln_cum_conf <=9.9
-	replace africa_map = 4 if ln_cum_conf > 5.3 & ln_cum_conf <=7.6
-	replace africa_map = 5 if ln_cum_conf== . | ln_cum_conf <= 5.3
-
-
-	label define map 1 "More than 100,000" 2 "10,000-100,000" 3 "1,000-10,000" 4 "101-1,000" 5 "No data" 
-
-	label values africa_map map
-	
-
-	spmap africa_map using "$projectfolder/data/worldcoord.dta", ///
-	id(id) fcolor ("222 110 75*1.4" "222 110 75*1" "222 110 75*0.6" "222 110 75*0.2" gs13) clmethod(unique) legend(size(medium)) title("Reported cases of COVID-19 in Africa.", size(medium) position(11)) ///
-	subtitle("After five months since the first case was reported in the region," "only South Africa and Egypt have crossed the 100,000 reported COVID-19 cases.", size(small) position(11) span) ///
-	note("{bf:Note}: Limited testing in sub-Saharan African countries could result in underreporting." ///
-	"{bf:Source}: own elaboration using CSSE at Johns Hopkins University data.  Accessed on $S_DATE {bf:CC BY}", size(vsmall))	///
-	legend(size(small))
-
-	graph export "$projectfolder/maps/africa_cumu_map.png", replace
-	
 
 	
 	
 /*====================================================================================
-              Chart 4: Bar chart of COVID-19 cases by country
+              Chart 3: Bar chart of COVID-19 cases by country
 ==================================================================================*/	
 	
 
@@ -333,7 +287,7 @@ Latest update: Sep 8, 2020
 	
 	
 /*====================================================================================
-              Chart 5: Reported cases line chart by country
+              Chart 4: Reported cases line chart by country
 ==================================================================================*/												
 
 
@@ -484,7 +438,7 @@ Latest update: Sep 8, 2020
 		
 		
 /*====================================================================================
-              Chart 6: Chart showing daily COVID-19 cases in South Africa and the rest of Africca
+              Chart 5: Chart showing daily COVID-19 cases in South Africa and the rest of Africca
 ==================================================================================*/
 	
 
@@ -534,6 +488,55 @@ Latest update: Sep 8, 2020
 
 	graph export "$projectfolder/charts/new_daily_cases.png", replace	
 
+
+	
+/*====================================================================================
+              Chart 6: Chart showing daily COVID-19 cases in all regions in the world
+==================================================================================*/	
+	
+	
+	use "$projectfolder/data/coronavirus_jhu_reported.dta", clear
+
+	collapse (sum) confirmed, by(region date)
+	
+	gen latest = region != region[_n+1]
+	
+	gen new_confirmed = confirmed - confirmed[_n-1] if region == region[_n-1]
+	
+	gen label = string(date, "%tdd-m") 
+	labmask date, values(label) 
+	
+	bysort region : gen daycount = _n	
+		
+	keep date region label new_confirmed
+	
+	reshape wide new_confirmed, i(date label) j(region) string
+	
+	gen day = day(date)
+	
+	replace label = "|" if day != 1
+	
+	labmask date, values(label) 
+	
+	egen total = rowtotal(new_confirmedEAS-new_confirmedSSF)
+	
+	foreach var of varlist new_confirmedEAS-new_confirmedSSF{
+		gen `var'_pct = `var'/total * 100
+	}
+	
+
+	graph bar (asis) new_confirmedEAS_pct new_confirmedECS_pct new_confirmedLCN_pct new_confirmedMEA_pct new_confirmedNAC_pct new_confirmedSAS_pct new_confirmedSSF_pct,  over(date, label(labsize(vsmall) angle(90)) gap(*0)) ///
+	bar(1, color("127 209 186")) bar(2, color("202 202 170")) bar(3, color("180 130 130")) bar(4, color("33 69 91")) bar(5, color("47 131 150")) bar(6, color("122 101 99")) bar(7, color("222 110 75")) stack ///
+	ylab(, labsize(vsmall)) ytitle("Share of total world COVID-19 reported cases per day by region (%)" " ", size(vsmall)) graphregion(color(white)) bgcolor(white) ///
+	title("Sub-Saharan Africa reported its peak of COVID-19 contagions between July and August." "Other regions reporting their lowest numbers are showing symptoms of a second wave.", size(small) position(11)) 	///
+	legend(cols(3) order(1 "East Asia and Pacific" 2 "Europe and Central Asia" 3 "Latin America and Caribbean" 4 "Middle East and North Africa" 5 "North America" 6 "South Asia" 7 "Sub-Saharan Africa") size(vsmall)) ///
+	note("{bf:Note}: Limited testing could result in underreporting." "{bf:Source}: own elaboration using CSSE at Johns Hopkins University data.  Accessed on $S_DATE {bf:CC BY}", size(vsmall) span)	
+	
+
+	graph export "$projectfolder/charts/new_daily_cases_region.png", replace	
+	
+	
+	
 	
 	
 *** end of do-file		
