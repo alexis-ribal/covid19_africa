@@ -36,6 +36,7 @@ The code to create the chart can be found [here](https://github.com/alexis-ribal
 ![Reported cases by country](/charts/confirmed_bar.png)
 ![Cumulative reported cases by country](/charts/countries_cumu_allssa.png)
 ![Daily reported cases in SSA and South Africa](/charts/new_daily_cases.png)
+![Daily reported cases by region](/charts/new_daily_cases_region.png)
 
 
 <!-- GETTING STARTED -->
