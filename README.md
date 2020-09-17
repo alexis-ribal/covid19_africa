@@ -22,11 +22,11 @@ We try to update the charts on a daily basis taking the numbers from the [COVID-
 
 While Sub-Saharan African region (SSA) started to record their first cases and deaths from COVID-19 weeks later than Asia, North America and Europe and testing and reporting has not been as consistent as in other parts of the world, it is important to observe any alarming signals from the data. For example, South Africa, the first country in SSA to report over 100 cases on March 18, did so one month after Italy and two weeks later than the United States and now is between the 10 countries with the highest number of reported cases.
 
-In this repository we facilitate the code used to create the charts that are posted in the [blog post](https://www.econfortransformation.org/reported-cases/) in the [Economics for Transformation](https://www.econfortransformation.org/) site.  We encourage the public to share these charts and for those who are int
-
-This repository contains the code used to create visualizations to show the evolution of the pandemic in the region.  More analysis can be found in the [blog post](https://www.econfortransformation.org/reported-cases/).
+In this repository we facilitate the code used to create the charts that are posted in the [blog post](https://www.econfortransformation.org/reported-cases/) in the [Economics for Transformation](https://www.econfortransformation.org/) site.  We encourage the public to share these charts and for those who are interested, use the model code to run their own analysis.
 
 The code to create the chart can be found [here](https://github.com/alexis-ribal/covid19_africa/blob/master/scripts/covid19_africa.do) and the high-resolution charts can be found [here](https://github.com/alexis-ribal/covid19_africa/tree/master/charts).
+
+*If you would like to see how the death numbers look like, please visit [https://github.com/alexis-ribal/covid19_africa_deaths](https://github.com/alexis-ribal/covid19_africa_deaths)*
 
 
 ### Charts
