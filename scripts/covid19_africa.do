@@ -43,7 +43,9 @@ Latest update: Sep 8, 2020
 
 
 	global projectfolder = "/Users/alexis_pro/Documents/GitHub/covid19_africa"
-	*global projectfolder = 
+	*global projectfolder = "here insert your own global path where you forked this repository or saved the data folders
+	
+	wbopendata, replace all
 	
 
 /*====================================================================================
@@ -534,7 +536,6 @@ Latest update: Sep 8, 2020
 	
 
 	graph export "$projectfolder/charts/new_daily_cases_region.png", replace	
-	
 	
 	
 	
